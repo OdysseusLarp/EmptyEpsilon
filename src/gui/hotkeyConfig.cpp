@@ -113,6 +113,8 @@ Keys::Keys() :
     helms_min_impulse("HELMS_IMPULSE_MIN"),
     helms_turn_left("HELMS_TURN_LEFT", "Left"),
     helms_turn_right("HELMS_TURN_RIGHT", "Right"),
+    helms_turn_left_fine("HELMS_TURN_LEFT_FINE", "Left (fine)"),
+    helms_turn_right_fine("HELMS_TURN_RIGHT_FINE", "Right (fine)"),
     helms_warp0("HELMS_WARP0", "6"),
     helms_warp1("HELMS_WARP1", "7"),
     helms_warp2("HELMS_WARP2", "8"),
@@ -319,6 +321,8 @@ void Keys::init()
     helms_min_impulse.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Max reverse impulse"));
     helms_turn_left.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Turn left"));
     helms_turn_right.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Turn right"));
+    helms_turn_left_fine.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Turn left (fine)"));
+    helms_turn_right_fine.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Turn right (fine)"));
     helms_warp0.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Warp off"));
     helms_warp1.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Warp 1"));
     helms_warp2.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Warp 2"));

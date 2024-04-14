@@ -54,6 +54,8 @@ public:
     sp::io::Keybinding helms_min_impulse;
     sp::io::Keybinding helms_turn_left;
     sp::io::Keybinding helms_turn_right;
+    sp::io::Keybinding helms_turn_left_fine;
+    sp::io::Keybinding helms_turn_right_fine;
     sp::io::Keybinding helms_warp0;
     sp::io::Keybinding helms_warp1;
     sp::io::Keybinding helms_warp2;
