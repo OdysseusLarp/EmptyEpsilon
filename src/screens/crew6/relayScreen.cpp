@@ -24,7 +24,7 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
 : GuiOverlay(owner, "RELAY_SCREEN", colorConfig.background), mode(TargetSelection)
 {
     targets.setAllowWaypointSelection();
-    radar = new GuiRadarView(this, "RELAY_RADAR", 50000.0f, &targets);
+    radar = new GuiRadarView(this, "RELAY_RADAR", my_spaceship->getLongRangeRadarRange() / 2.0f, &targets);
     radar->longRange()->enableWaypoints()->enableCallsigns()->setStyle(GuiRadarView::Rectangular)->setFogOfWarStyle(GuiRadarView::FriendlysShortRangeFogOfWar);
     radar->setAutoCentering(false);
     radar->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);

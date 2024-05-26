@@ -44,7 +44,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
     radar_view->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Draw the science radar.
-    science_radar = new GuiRadarView(radar_view, "SCIENCE_RADAR", 100000.0, &targets);
+    science_radar = new GuiRadarView(radar_view, "SCIENCE_RADAR", my_spaceship->getLongRangeRadarRange(), &targets);
     science_radar->setPosition(-270, 0, sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     science_radar->setRangeIndicatorStepSize(10000.0)->longRange()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular)->setFogOfWarStyle(GuiRadarView::NebulaFogOfWar);
     science_radar->setCallbacks(

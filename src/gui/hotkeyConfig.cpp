@@ -194,7 +194,9 @@ Keys::Keys() :
         {"WEAPONS_FIRE_TUBE16"},
     }},
     weapons_enemy_next_target("WEAPONS_TARGET_NEXT_ENEMY", "C"),
+		weapons_enemy_prev_target("WEAPONS_TARGET_PREV_ENEMY"),
     weapons_next_target("WEAPONS_TARGET_NEXT", "Z"),
+		weapons_prev_target("WEAPONS_TARGET_PREV"),
     weapons_toggle_shields("WEAPONS_SHIELDS_TOGGLE", "S"),
     weapons_enable_shields("WEAPONS_SHIELDS_ENABLE"),
     weapons_disable_shields("WEAPONS_SHIELDS_DISABLE"),
@@ -354,7 +356,9 @@ void Keys::init()
         weapons_fire_tube[n].setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Fire tube {number}").format({{"number", string(n+1)}}));
     }
     weapons_enemy_next_target.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Select next hostile target"));
+    weapons_enemy_prev_target.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Select previous hostile target"));
     weapons_next_target.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Select next target (any)"));
+    weapons_prev_target.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Select previous target (any)"));
     weapons_toggle_shields.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Toggle shields"));
     weapons_enable_shields.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Enable shields"));
     weapons_disable_shields.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Disable shields"));

@@ -84,7 +84,9 @@ public:
     std::array<sp::io::Keybinding, 16> weapons_unload_tube;
     std::array<sp::io::Keybinding, 16> weapons_fire_tube;
     sp::io::Keybinding weapons_enemy_next_target;
+    sp::io::Keybinding weapons_enemy_prev_target;
     sp::io::Keybinding weapons_next_target;
+    sp::io::Keybinding weapons_prev_target;
     sp::io::Keybinding weapons_toggle_shields;
     sp::io::Keybinding weapons_enable_shields;
     sp::io::Keybinding weapons_disable_shields;

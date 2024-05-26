@@ -30,7 +30,7 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
     // Render the alert level color overlay.
     (new AlertLevelOverlay(this));
 
-    GuiRadarView* radar = new GuiRadarView(this, "HELMS_RADAR", 10000.0, nullptr);
+    GuiRadarView* radar = new GuiRadarView(this, "HELMS_RADAR", my_spaceship->getShortRangeRadarRange(), nullptr);
     
     combat_maneuver = new GuiCombatManeuver(this, "COMBAT_MANEUVER");
     combat_maneuver->setPosition(-20, -20, sp::Alignment::BottomRight)->setSize(280, 215)->setVisible(my_spaceship && my_spaceship->getCanCombatManeuver());
