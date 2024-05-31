@@ -214,8 +214,11 @@ Keys::Keys() :
     weapons_aim_right("WEAPONS_AIM_RIGHT", "H"),
 
     //Science
+    science_probe_view("SCIENCE_PROBE_VIEW"),
     science_scan_object("SCIENCE_SCAN_OBJECT", "S"),
+    science_cancel_scan("SCIENCE_CANCEL_SCAN"),
     science_select_next_scannable("SCIENCE_SELECT_NEXT_SCANNABLE", "C"),
+    science_select_prev_scannable("SCIENCE_SELECT_PREV_SCANNABLE"),
     science_scan_param_increase{{
         {"SIENCE_SCAN_PARAM_INCREASE_1"},
         {"SIENCE_SCAN_PARAM_INCREASE_2"},
@@ -382,8 +385,11 @@ void Keys::init()
     weapons_aim_right.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Turn missile aim to the right"));
 
     //Science
+    science_probe_view.setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Probe View"));
     science_scan_object.setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Scan object"));
+    science_cancel_scan.setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Cancel scan"));
     science_select_next_scannable.setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Select next scannable object"));
+    science_select_prev_scannable.setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Select prev scannable object"));
     for(auto n = 0u; n < science_scan_param_increase.size(); n++)
     {
         science_scan_param_increase[n].setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Scanning parameter {number} increase").format({{"number", string(n+1)}}));

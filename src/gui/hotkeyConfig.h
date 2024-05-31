@@ -104,8 +104,11 @@ public:
     sp::io::Keybinding weapons_aim_right;
 
     //Science
+    sp::io::Keybinding science_probe_view;
     sp::io::Keybinding science_scan_object;
+    sp::io::Keybinding science_cancel_scan;
     sp::io::Keybinding science_select_next_scannable;
+    sp::io::Keybinding science_select_prev_scannable;
     std::array<sp::io::Keybinding, 4> science_scan_param_increase;
     std::array<sp::io::Keybinding, 4> science_scan_param_decrease;
     std::array<sp::io::Keybinding, 4> science_scan_param_set;
