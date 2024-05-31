@@ -466,8 +466,11 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     /// Checks whether the state of landing pad indicated by the parameter is 'Launched' or not.
     /// Example: ship:isLandingPadLaunched(3) -- returns 'true' if the ship associated with landing pad 3 is launched; returns 'false' if the ship is docked or destroyed
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, isLandingPadLaunched);
+    /// Sets the landing pad indicated by the number parameter to the state indicated by the state parameter (0 = 'Destroyed', 1 = 'Docked', 2 = 'Launched').
+    /// Example: ship:setLandingPadState(1, 1) -- sets the status of landing pad 1 to 'Docked'
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setLandingPadState);
     /// Returns the state of the landing pad in question as an enumerable with values 'LP_Docked', 'LP_Destroyed' and 'LP_Launched'.
-    /// Example: ship:getLandingPadState(3) -- returns 'LP_Docked' if a ship is docked on landing pad 3, 'LP_Destroyed if the ship associated with landing pad 3 has been destroyed (and has not yet been retrieved), and 'LP_Launched' if the ship associated with landing pad 3 has been launched
+    /// Example: ship:getLandingPadState(3) -- returns 'LP_Docked' if a ship is docked on landing pad 3, 'LP_Destroyed' if the ship associated with landing pad 3 has been destroyed (and has not yet been retrieved), and 'LP_Launched' if the ship associated with landing pad 3 has been launched
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getLandingPadState);
 }
 

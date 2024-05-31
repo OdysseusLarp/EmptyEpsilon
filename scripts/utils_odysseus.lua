@@ -2,15 +2,15 @@
 -- Modified and simplified the functions after the Odysseus larp by Mikko B
 -- FOR SOME REASON THE FIRST SCENE NEEDS TO BE LOADED TWICE FOR THE SCRIPTS TO WORK PROPERLY.
 
--- Add common GM functions
-addGMFunction("Enemy north", wavenorth)
-addGMFunction("Enemy east", waveeast)
-addGMFunction("Enemy south", wavesouth)
-addGMFunction("Enemy west", wavewest)
-addGMFunction("Allow ESSODY18", allow_essody18)
-addGMFunction("Allow ESSODY23", allow_essody23)
-addGMFunction("Allow ESSODY36", allow_essody36)
-addGMFunction("Allow STARCALLER", allow_starcaller)
+-- Add common GM functions (these need to be added in the scenario scripts, so commented out here -Ville)
+-- addGMFunction("Enemy north", wavenorth)
+-- addGMFunction("Enemy east", waveeast)
+-- addGMFunction("Enemy south", wavesouth)
+-- addGMFunction("Enemy west", wavewest)
+-- addGMFunction("Allow ESSODY18", allow_essody18)
+-- addGMFunction("Allow ESSODY23", allow_essody23)
+-- addGMFunction("Allow ESSODY36", allow_essody36)
+-- addGMFunction("Allow STARCALLER", allow_starcaller)
 
 -- spawn the ESS Odysseus
 odysseus = PlayerSpaceship():setFaction("EOC Starfleet"):setTemplate("Corvette C743"):setCallSign("ESS Odysseus"):setPosition(0, 0):setCanBeDestroyed(false)
@@ -105,8 +105,8 @@ function spawn_essody18()
 	x, y = odysseus:getPosition()
 	essody18 = PlayerSpaceship():setFaction("EOC Starfleet"):setTemplate("Fighter F967"):setPosition(x + 200, y + 200):setCallSign("ESSODY18"):setAutoCoolant(true):onDestruction(
 	function(this, instigator) 
-		odysseus:setLandingPadDestroyed(2)
-		addGMFunction("Allow ESSODY23", allow_essody23)
+		odysseus:setLandingPadDestroyed(1)
+		addGMFunction("Allow ESSODY18", allow_essody18)
 	end)
 	essody18:addCustomButton("Helms", "dock_to_odysseus", "Dock to Odysseys", dock_essody18)
   	odysseus:setLandingPadLaunched(1)
@@ -154,54 +154,92 @@ function dock_essody18()
 	for _, obj in ipairs(getObjectsInRadius(x, y, dockingdist)) do
 		callSign = obj:getCallSign()
 		if callSign == "ESS Odysseus" then
-			essody18:destroy()
 			essody18_launched = 0
-      odysseus:setLandingPadDocked(1)
+      		odysseus:setLandingPadDocked(1)
 			odysseus:addCustomButton("Relay", "launch_pad_1", "Launch ESSODY18", launch_essody18)
-		else
-			essody18:addCustomMessage("Helms", "Distance too far. Docking cancelled.", "Distance too far. Docking cancelled.")
+			essody18:destroy()
+			return
 		end
 	end
+	essody18:addCustomMessage("Helms", "Distance too far. Docking cancelled.", "Distance too far. Docking cancelled.")
 end
 function dock_essody23()
 	x, y = essody23:getPosition()
 	for _, obj in ipairs(getObjectsInRadius(x, y, dockingdist)) do
 		callSign = obj:getCallSign()
 		if callSign == "ESS Odysseus" then
-			essody23:destroy()
 			essody23_launched = 0
-      odysseus:setLandingPadDocked(2)
+      		odysseus:setLandingPadDocked(2)
 			odysseus:addCustomButton("Relay", "launch_pad_2", "Launch ESSODY23", launch_essody23)
-		else
-			essody23:addCustomMessage("Helms", "Distance too far. Docking cancelled.", "Distance too far. Docking cancelled.")
+			essody23:destroy()
+			return
 		end
 	end
+	essody23:addCustomMessage("Helms", "Distance too far. Docking cancelled.", "Distance too far. Docking cancelled.")
 end
 function dock_essody36()
 	x, y = essody36:getPosition()
 	for _, obj in ipairs(getObjectsInRadius(x, y, dockingdist)) do
 		callSign = obj:getCallSign()
 		if callSign == "ESS Odysseus" then
-			essody36:destroy()
 			essody36_launched = 0
-      odysseus:setLandingPadDocked(3)
+      		odysseus:setLandingPadDocked(3)
 			odysseus:addCustomButton("Relay", "launch_pad_3", "Launch ESSODY36", launch_essody36)
-		else
-			essody36:addCustomMessage("Helms", "Distance too far. Docking cancelled.", "Distance too far. Docking cancelled.")
+			essody36:destroy()
+			return
 		end
 	end
+	essody36:addCustomMessage("Helms", "Distance too far. Docking cancelled.", "Distance too far. Docking cancelled.")
 end
 function dock_starcaller()
 	x, y = starcaller:getPosition()
 	for _, obj in ipairs(getObjectsInRadius(x, y, dockingdist)) do
 		callSign = obj:getCallSign()
 		if callSign == "ESS Odysseus" then
-			starcaller:destroy()
 			starcaller_launched = 0
-      odysseus:setLandingPadDocked(4)
+      		odysseus:setLandingPadDocked(4)
 			odysseus:addCustomButton("Relay", "launch_pad_4", "Launch STARCALLER", launch_starcaller)
-		else
-			starcaller:addCustomMessage("Helms", "Distance too far. Docking cancelled.", "Distance too far. Docking cancelled.")
+			starcaller:destroy()
+			return
 		end
+	end
+	starcaller:addCustomMessage("Helms", "Distance too far. Docking cancelled.", "Distance too far. Docking cancelled.")
+end
+
+-- Button synchronizer
+function sync_buttons()
+	removeGMFunction("Allow ESSODY18")
+	removeGMFunction("Allow ESSODY23")
+	removeGMFunction("Allow ESSODY36")
+	removeGMFunction("Allow STARCALLER")
+	odysseus:removeCustom("launch_pad_1")
+	odysseus:removeCustom("launch_pad_2")
+	odysseus:removeCustom("launch_pad_3")
+	odysseus:removeCustom("launch_pad_4")
+	
+	if odysseus:isLandingPadDestroyed(1) then
+		addGMFunction("Allow ESSODY18", allow_essody18)
+	end
+	if odysseus:isLandingPadDestroyed(2) then
+		addGMFunction("Allow ESSODY23", allow_essody23)
+	end
+	if odysseus:isLandingPadDestroyed(3) then
+		addGMFunction("Allow ESSODY36", allow_essody36)
+	end
+	if odysseus:isLandingPadDestroyed(4) then
+		addGMFunction("Allow STARCALLER", allow_starcaller)
+	end
+
+	if odysseus:isLandingPadDocked(1) then
+		odysseus:addCustomButton("Relay", "launch_pad_1", "Launch ESSODY18", launch_essody18)
+	end
+	if odysseus:isLandingPadDocked(2) then
+		odysseus:addCustomButton("Relay", "launch_pad_2", "Launch ESSODY23", launch_essody23)
+	end
+	if odysseus:isLandingPadDocked(3) then
+		odysseus:addCustomButton("Relay", "launch_pad_3", "Launch ESSODY36", launch_essody36)
+	end
+	if odysseus:isLandingPadDocked(4) then
+		odysseus:addCustomButton("Relay", "launch_pad_4", "Launch STARCALLER", launch_starcaller)
 	end
 end
