@@ -266,9 +266,15 @@ Keys::Keys() :
     engineering_self_destruct_confirm("ENGINEERING_SELF_DESTRUCT_CONFIRM"),
     engineering_self_destruct_cancel("ENGINEERING_SELF_DESTRUCT_CANCEL"),
 
+    //Relay
     relay_alert_level_none("RELAY_ALERT_NONE"),
     relay_alert_level_yellow("RELAY_ALERT_YELLOW"),
     relay_alert_level_red("RELAY_ALERT_RED"),
+    relay_probe_launch("RELAY_PROBE_LAUNCH"),
+    relay_probe_link_to_science("RELAY_PROBE_LINK_TO_SCIENCE"),
+    relay_hacking_start("RELAY HACKING_START"),
+    relay_waypoint_set("RELAY_WAYPOINT_SET"),
+    relay_waypoint_delete("RELAY_WAYOINT_DELETE"),
 
     gm_delete("GM_DELETE", "Delete"),
     gm_clipboardcopy("GM_CLIPBOARD_COPY", "F5"),
@@ -419,6 +425,11 @@ void Keys::init()
     relay_alert_level_none.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Relay", "Alert level: Normal"));
     relay_alert_level_yellow.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Relay", "Alert level: Yellow"));
     relay_alert_level_red.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Relay", "Alert level: Red"));
+    relay_probe_launch.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Relay", "Launch probe"));
+    relay_probe_link_to_science.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Relay", "Link probe to science"));
+    relay_hacking_start.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Relay", "Start hacking"));
+    relay_waypoint_set.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Relay", "Set waypoint"));
+    relay_waypoint_delete.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Relay", "Delete waypoint"));
 
     cinematic.init();
     topdown.init();

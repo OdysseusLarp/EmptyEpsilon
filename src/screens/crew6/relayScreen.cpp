@@ -306,3 +306,48 @@ void RelayScreen::onDraw(sp::RenderTarget& renderer)
     else
         delete_waypoint_button->disable();
 }
+
+void RelayScreen::onUpdate()
+{
+    if (my_spaceship)
+    {
+        // Launch probe if probes are available.
+        if (keys.relay_probe_launch.getDown() && my_spaceship->getCanLaunchProbe() && my_spaceship->scan_probe_stock > 0)
+        {
+            mode = LaunchProbe;
+            option_buttons->hide();
+        }
+        // Link probe to science.
+        if (keys.relay_probe_link_to_science.getDown() && my_spaceship->getCanLaunchProbe() && targets.get())
+        {
+            if (link_to_science_button->getValue())
+            {
+                my_spaceship->commandClearScienceLink();
+            }
+            else
+            {
+                my_spaceship->commandSetScienceLink(targets.get());
+            }
+        }
+        // Start hacking
+        if (targets.get()) {
+            P<SpaceObject> target = targets.get();
+            if (keys.relay_hacking_start.getDown() && target->canBeHackedBy(my_spaceship)) 
+            {
+              hacking_dialog->open(target);
+            }
+        }
+        // Set waypoint.
+        if (keys.relay_waypoint_set.getDown())
+        {
+            mode = WaypointPlacement;
+            option_buttons->hide();
+        }
+
+        // Delete waypoint.
+        if (keys.relay_waypoint_delete.getDown() && targets.getWaypointIndex() >= 0)
+        {
+            my_spaceship->commandRemoveWaypoint(targets.getWaypointIndex());
+        }
+    }
+}

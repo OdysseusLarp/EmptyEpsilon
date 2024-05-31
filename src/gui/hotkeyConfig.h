@@ -145,6 +145,11 @@ public:
     sp::io::Keybinding relay_alert_level_none;
     sp::io::Keybinding relay_alert_level_yellow;
     sp::io::Keybinding relay_alert_level_red;
+    sp::io::Keybinding relay_probe_launch;
+    sp::io::Keybinding relay_probe_link_to_science;
+    sp::io::Keybinding relay_hacking_start;
+    sp::io::Keybinding relay_waypoint_set;
+    sp::io::Keybinding relay_waypoint_delete;
 
     // Cinematic View
     struct CinematicKeys {
