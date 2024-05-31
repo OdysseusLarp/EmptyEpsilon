@@ -21,7 +21,7 @@ GuiShipDestroyedPopup::GuiShipDestroyedPopup(GuiCanvas* owner)
     (new GuiLabel(ship_destroyed_overlay, "SHIP_DESTROYED_TEXT", "RETURNING TO ESS ODYSSEUS", 70))->setPosition(0, 0, sp::Alignment::Center)->setSize(800, 100);
 
     ship_docking_overlay = new GuiOverlay(this, "SHIP_DOCKING", glm::u8vec4(0, 0, 0, 128));
-    (new GuiPanel(ship_docking_overlay, "SHIP_DOCKING_FRAME"))->setPosition(0, 0, sp::Alignment::Center)->setSize(500, 100);
+    (new GuiPanel(ship_docking_overlay, "SHIP_DOCKING_FRAME"))->setPosition(0, 0, sp::Alignment::Center)->setSize(800, 100);
     (new GuiLabel(ship_docking_overlay, "SHIP_DOCKING_TEXT", "AUTOMATED DOCKING IN PROGRESS", 70))->setPosition(0, 0, sp::Alignment::Center)->setSize(800, 100);
 
     ship_docked_overlay = new GuiOverlay(this, "SHIP_DOCKED", glm::u8vec4(0, 0, 0, 128));
