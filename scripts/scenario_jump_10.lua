@@ -29,7 +29,6 @@ function init()
 
       
 	setScenarioChange('Change scenario - 11', "scenario_jump_11.lua")
-
 	-- Generate scenario map
 	generateSpace(sx, sy)
 

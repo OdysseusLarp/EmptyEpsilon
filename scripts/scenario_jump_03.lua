@@ -5,7 +5,6 @@
 require("utils.lua")
 require("utils_odysseus.lua")
 
-
 function init()
 
 	-- Add GM common functions - Order of the buttons: fleet, enemies, Scenario change, scenario specific

@@ -34,6 +34,5 @@ function init()
 
 	  planet = setUpPlanet("AS-OH108", 5000, 15000)
 
-	
 end
 

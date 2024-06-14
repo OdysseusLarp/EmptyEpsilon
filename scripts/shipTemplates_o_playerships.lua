@@ -16,8 +16,6 @@ template:setTubeDirection(0, 0)
 template:setTubeDirection(1, 0)
 template:setWeaponStorage("Homing", 250)
 
-
-
 template:setShortRangeRadarRange(10000)
 template:setLongRangeRadarRange(100000)
 

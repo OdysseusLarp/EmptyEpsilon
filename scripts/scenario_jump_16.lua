@@ -30,6 +30,5 @@ function init()
 
 	
 	setScenarioChange('Change scenario - 17', "scenario_jump_17.lua")
-
 end
 

@@ -38,5 +38,4 @@ function init()
 		-- Planet
 		planet = setUpPlanet("P-TE49-HE75", 20000, -25000)
 
-
 end

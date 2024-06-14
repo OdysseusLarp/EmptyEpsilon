@@ -22,7 +22,6 @@ require("generate_call_sign_scenario_utility.lua")
 -- Generating space objects for Odysseus
 require("utils_odysseus_generatespace.lua")
 
-
 -- spawn the ESS Odysseus
 local orotation = irandom(0, 360)
 odysseus = PlayerSpaceship():setFaction("EOC Starfleet"):setTemplate("Helios Corvette"):setCallSign("ESS Odysseus"):setPosition(0, 0):commandTargetRotation(orotation):setHeading(orotation+90):setCanBeDestroyed(false)
@@ -165,5 +164,44 @@ function setUpLaunchmissionButtons(minutes, lx, ly)
 			checkFlightStatus(ship, delta)
 		end
 
+	end
+	starcaller:addCustomMessage("Helms", "Distance too far. Docking cancelled.", "Distance too far. Docking cancelled.")
+end
+
+-- Button synchronizer
+function sync_buttons()
+	removeGMFunction("Allow ESSODY18")
+	removeGMFunction("Allow ESSODY23")
+	removeGMFunction("Allow ESSODY36")
+	removeGMFunction("Allow STARCALLER")
+	odysseus:removeCustom("launch_pad_1")
+	odysseus:removeCustom("launch_pad_2")
+	odysseus:removeCustom("launch_pad_3")
+	odysseus:removeCustom("launch_pad_4")
+	
+	if odysseus:isLandingPadDestroyed(1) then
+		addGMFunction("Allow ESSODY18", allow_essody18)
+	end
+	if odysseus:isLandingPadDestroyed(2) then
+		addGMFunction("Allow ESSODY23", allow_essody23)
+	end
+	if odysseus:isLandingPadDestroyed(3) then
+		addGMFunction("Allow ESSODY36", allow_essody36)
+	end
+	if odysseus:isLandingPadDestroyed(4) then
+		addGMFunction("Allow STARCALLER", allow_starcaller)
+	end
+
+	if odysseus:isLandingPadDocked(1) then
+		odysseus:addCustomButton("Relay", "launch_pad_1", "Launch ESSODY18", launch_essody18)
+	end
+	if odysseus:isLandingPadDocked(2) then
+		odysseus:addCustomButton("Relay", "launch_pad_2", "Launch ESSODY23", launch_essody23)
+	end
+	if odysseus:isLandingPadDocked(3) then
+		odysseus:addCustomButton("Relay", "launch_pad_3", "Launch ESSODY36", launch_essody36)
+	end
+	if odysseus:isLandingPadDocked(4) then
+		odysseus:addCustomButton("Relay", "launch_pad_4", "Launch STARCALLER", launch_starcaller)
 	end
 end
