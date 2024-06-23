@@ -1,9 +1,10 @@
 -- Name: Jump 04
 -- Type: Odysseus
--- Description: Onload: Odysseus, random asteroids. EOC fleet.
+-- Description: No objects of interest.
 
 require("utils.lua")
 require("utils_odysseus.lua")
+scenarioMap = "Map objects on load: No objects of interest. \nNo setup actions."
 setScenarioChange(5)
 
 function init()
@@ -28,7 +29,7 @@ function init()
     addGMFunction(_("Enemy", "OC - Machine - S"), function() spawnwave(2) end)
 	addGMFunction(_("Enemy", "OC - Machine - Backup XS"), function() spawnwave(1) end)
 
-	addGMFunction("Destroy ESS Vulture", confirm_vulture)
+	addGMFunction("Destroy OSS Vulture", confirm_vulture)
 
 
 	-- Generate scenario map
