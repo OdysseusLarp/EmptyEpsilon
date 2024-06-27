@@ -194,21 +194,21 @@ void PowerManagementScreen::onUpdate()
             }
             if (keys.engineering_set_coolant_025.getDown())
             {
-                coolant_slider->setValue(0.25f);
+                coolant_slider->setValue(2.5f);
                 my_spaceship->commandSetSystemCoolantRequest(selected_system, coolant_slider->getValue());
             }
             if (keys.engineering_set_coolant_050.getDown())
             {
-                coolant_slider->setValue(0.5f);
+                coolant_slider->setValue(5.0f);
                 my_spaceship->commandSetSystemCoolantRequest(selected_system, coolant_slider->getValue());
             }
             if (keys.engineering_set_coolant_100.getDown())
             {
-                coolant_slider->setValue(1.0f);
+                coolant_slider->setValue(10.0f);
                 my_spaceship->commandSetSystemCoolantRequest(selected_system, coolant_slider->getValue());
             }
             
-            auto coolant_adjust = (keys.engineering_increase_coolant.getValue() - keys.engineering_decrease_coolant.getValue()) * 0.01f;
+            auto coolant_adjust = (keys.engineering_increase_coolant.getValue() - keys.engineering_decrease_coolant.getValue()) * 0.05f;
             if (coolant_adjust != 0.0f)
             {
                 coolant_slider->setValue(my_spaceship->systems[selected_system].coolant_request + coolant_adjust);
