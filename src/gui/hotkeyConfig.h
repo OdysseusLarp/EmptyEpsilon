@@ -124,7 +124,7 @@ public:
     sp::io::Keybinding engineering_select_front_shield_system;
     sp::io::Keybinding engineering_select_rear_shield_system;
     sp::io::Keybinding engineering_set_power_000;
-    sp::io::Keybinding engineering_set_power_030;
+    sp::io::Keybinding engineering_set_power_025;
     sp::io::Keybinding engineering_set_power_050;
     sp::io::Keybinding engineering_set_power_100;
     sp::io::Keybinding engineering_set_power_150;
@@ -133,6 +133,10 @@ public:
     sp::io::Keybinding engineering_set_power_300;
     sp::io::Keybinding engineering_increase_power;
     sp::io::Keybinding engineering_decrease_power;
+    sp::io::Keybinding engineering_set_coolant_000;
+    sp::io::Keybinding engineering_set_coolant_025;
+    sp::io::Keybinding engineering_set_coolant_050;
+    sp::io::Keybinding engineering_set_coolant_100;
     sp::io::Keybinding engineering_increase_coolant;
     sp::io::Keybinding engineering_decrease_coolant;
     sp::io::Keybinding engineering_next_repair_crew;

@@ -249,7 +249,7 @@ Keys::Keys() :
     engineering_select_front_shield_system("ENGINEERING_SELECT_SYSTEM_FRONT_SHIELD", "8"),
     engineering_select_rear_shield_system("ENGINEERING_SELECT_SYSTEM_READ_SHIELD", "9"),
     engineering_set_power_000("ENGINEERING_POWER_000"),
-    engineering_set_power_030("ENGINEERING_POWER_030"),
+    engineering_set_power_025("ENGINEERING_POWER_025"),
     engineering_set_power_050("ENGINEERING_POWER_050"),
     engineering_set_power_100("ENGINEERING_POWER_100", "Space"),
     engineering_set_power_150("ENGINEERING_POWER_150"),
@@ -258,6 +258,10 @@ Keys::Keys() :
     engineering_set_power_300("ENGINEERING_POWER_300"),
     engineering_increase_power("ENGINEERING_POWER_INCREASE", "Up"),
     engineering_decrease_power("ENGINEERING_POWER_DECREASE", "Down"),
+    engineering_set_coolant_000("ENGINEERING_POWER_000"),
+    engineering_set_coolant_025("ENGINEERING_POWER_025"),
+    engineering_set_coolant_050("ENGINEERING_POWER_050"),
+    engineering_set_coolant_100("ENGINEERING_POWER_100"),
     engineering_increase_coolant("ENGINEERING_COOLANT_INCREASE", "Left"),
     engineering_decrease_coolant("ENGINEERING_COOLANT_DECREASE", "Right"),
     engineering_next_repair_crew("ENGINEERING_REPAIR_CREW_NEXT", "Q"),
@@ -414,7 +418,7 @@ void Keys::init()
     engineering_select_front_shield_system.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Select front shields system"));
     engineering_select_rear_shield_system.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Select rear shields system"));
     engineering_set_power_000.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set system power to 0%"));
-    engineering_set_power_030.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set system power to 30%"));
+    engineering_set_power_025.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set system power to 25%"));
     engineering_set_power_050.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set system power to 50%"));
     engineering_set_power_100.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set system power to 100%"));
     engineering_set_power_150.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set system power to 150%"));
@@ -423,6 +427,10 @@ void Keys::init()
     engineering_set_power_300.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set system power to 300%"));
     engineering_increase_power.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Increase system power"));
     engineering_decrease_power.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Decrease system power"));
+    engineering_set_coolant_000.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set system coolant to 0%"));
+    engineering_set_coolant_025.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set system coolant to 25%"));
+    engineering_set_coolant_050.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set system coolant to 50%"));
+    engineering_set_coolant_100.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set system coolant to 100%"));
     engineering_increase_coolant.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Increase system coolant"));
     engineering_decrease_coolant.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Decrease system coolant"));
     engineering_next_repair_crew.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Next repair crew"));
