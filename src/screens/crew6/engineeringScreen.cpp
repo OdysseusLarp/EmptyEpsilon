@@ -411,7 +411,7 @@ void EngineeringScreen::onUpdate()
                 my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
 
-            auto power_adjust = (keys.engineering_increase_power.getValue() - keys.engineering_decrease_power.getValue()) * 0.01f;
+            auto power_adjust = (keys.engineering_increase_power.getValue() - keys.engineering_decrease_power.getValue()) * 0.1f;
             if (power_adjust != 0.0f)
             {
                 power_slider->setValue(my_spaceship->systems[selected_system].power_request + power_adjust);
@@ -439,7 +439,7 @@ void EngineeringScreen::onUpdate()
                 my_spaceship->commandSetSystemCoolantRequest(selected_system, coolant_slider->getValue());
             }
 
-            auto coolant_adjust = (keys.engineering_increase_coolant.getValue() - keys.engineering_decrease_coolant.getValue()) * 0.05f;
+            auto coolant_adjust = (keys.engineering_increase_coolant.getValue() - keys.engineering_decrease_coolant.getValue()) * 0.5f;
             if (coolant_adjust != 0.0f)
             {
                 coolant_slider->setValue(my_spaceship->systems[selected_system].coolant_request + coolant_adjust);
