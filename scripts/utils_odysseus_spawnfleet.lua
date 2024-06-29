@@ -347,14 +347,14 @@ end
 
 
 function confirm_vulture()
-	removeGMFunction("Destroy ESS Vulture")
+	removeGMFunction("Destroy OSS Vulture")
 	addGMFunction("Cancel destruction", cancel_vulture)
 	addGMFunction("Confirm destruction", destroy_vulture)
 
 end
 
 function cancel_vulture()
-	addGMFunction("Destroy ESS Vulture", confirm_vulture)
+	addGMFunction("Destroy OSS Vulture", confirm_vulture)
 	removeGMFunction("Cancel destruction")
 	removeGMFunction("Confirm destruction")
 end
