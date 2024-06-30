@@ -18,7 +18,7 @@ function init()
 	local sy = 4500
 
 	-- Button name, fleet number, fleet variation, sx, sy, fleet ship distances while in formation, fleet spawn chaos factor, reveal call signs at spawn, orders at spawn, delayJumpInMin, delayJumpInMax, delayJumpOutMin, delayJumpOutMax
-	setSpawnFleetButton(1, nil , sx, sy, 2, 1, true, "formation", 0, 3, 0, 1)
+	setSpawnFleetButton(1, nil , sx, sy, 2, 1, true, "idle", 0, 3, 0, 1)
 
 
 	-- Spawnface parameters: (distance from Odysseus, enemyfleetsize)

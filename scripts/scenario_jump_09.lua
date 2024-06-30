@@ -28,7 +28,7 @@ function init()
 
 	local sx = -5000
 	local sy = 4500
-	setSpawnFleetButton(2, nil, sx, sy, 2, 3, true, "formation", 0, 1, 0, 2)
+	setSpawnFleetButton(2, nil, sx, sy, 2, 3, true, "idle", 0, 1, 0, 2)
 
 	-- Spawnface parameters: (distance from Odysseus, enemyfleetsize)
 	-- 1 = very small, 2 = small, 3 = mdium, 4 = large, 5 = massive, 6 = end fleet

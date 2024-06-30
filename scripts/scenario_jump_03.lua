@@ -18,7 +18,7 @@ function init()
 	local sy = -30000
 
 	-- fleet number, fleet variation, sx, sy, fleet ship distances while in formation, fleet spawn chaos factor, reveal call signs at spawn, orders at spawn, delayJumpInMin, delayJumpInMax, delayJumpOutMin, delayJumpOutMax
-	setSpawnFleetButton(1, nil, sx, sy, 2, 1, false, "formation", 0, 1, 0, 3)
+	setSpawnFleetButton(1, nil, sx, sy, 2, 1, false, "formation", 0, 0, 0, 3)
 	
 	-- Spawnface parameters: (enemyfleetsize)
 	-- 1 = very small, 2 = small, 3 = mdium, 4 = large, 5 = massive, 6 = end fleet
