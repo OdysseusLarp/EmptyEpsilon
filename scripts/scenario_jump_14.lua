@@ -16,6 +16,7 @@ function init()
 	local sx = 8000
 	local sy = -10500
 
+	addGMFunction("OC - Spawn Cherry", spawnCherryOnClick)
 
 	setSpawnFleetButton(4, "A", sx, sy, 2, 1, true, "formation", 0, 1, 0, 3)
 	setSpawnFleetButton(4, "B", sx, sy, 2, 1, true, "formation", 0, 1, 0, 3)
@@ -99,6 +100,24 @@ function init()
   
   end
 
+  function spawnCherryOnClick()
+	onGMClick(function(x, y)
+        onGMClick(nil)
+        spawnCherry(x, y)
+    end)
+  end
+
+  function spawnCherry(x, y)
+	cherry = CpuShip():setCallSign("Cherry"):setFaction("Unregistered"):setTemplate("Machine Stinger"):setPosition(x, y):setCanBeDestroyed(false):orderDock(odysseus, 200, 200)
+	addGMFunction("Dock Cherry", dockCherry)
+end
+
+  function dockCherry()
+	removeGMFunction("Dock Cherry")
+	cherry:destroy()
+  end
+  
+
   function delayChecks(delta)
   
 	  if odysseus_alert < 1 then
@@ -179,7 +198,7 @@ function init()
 	end
   
   end
-  
+
   function zoneChecks(ship)
   
 	  if dangerZone:isInside(ship) then
