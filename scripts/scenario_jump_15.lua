@@ -16,8 +16,8 @@ function init()
 	-- Add GM common functions - Order of the buttons: Sync, fleet, enemies, Scenario change, scenario specific
 	local sx = -10000
 	local sy = 8500
-	setSpawnFleetButton(4, "A", sx, sy, 3, 1, true, "formation", 0, 3, 0, 1)
-	setSpawnFleetButton(4, "B", sx, sy, 3, 1, true, "formation", 0, 3, 0, 1)
+	setSpawnFleetButton(4, "A", sx, sy, 3, 1, true, "idle", 0, 3, 0, 1)
+	setSpawnFleetButton(4, "B", sx, sy, 3, 1, true, "idle", 0, 3, 0, 1)
 	addGMFunction(_("Enemy", "Set Aurora heading"), function() 
 		if aurora:isValid() then 
 			aurora:setHeading(45)
@@ -28,11 +28,10 @@ function init()
 	-- 1 = very small, 2 = small, 3 = mdium, 4 = large, 5 = massive, 6 = end fleet
 	-- When distance set to 50000, it takes about 7-8 minutes enemy to reach attack range	
 	addGMFunction(_("Enemy", "OC - Machine - M"), function() spawnwave(3) end)
-	addGMFunction(_("Enemy", "OC - Machine - Backup XS"), function() spawnwave(1) end)
+	addGMFunction(_("Enemy", "OC - Backup M"), function() spawnwave(3) end)
 
 	addGMFunction(_("Enemy", "Harbinger transport"), function() 
 		launchHarbinger()
-		removeGMFunction("Harbinger transport")
 	end)
 
   local lx = ox +35000
@@ -61,11 +60,16 @@ function init()
 
 	  local dist = distance(odysseus, planet)
 
-
 end
 
 function launchHarbinger()
 	local hx, hy = harbinger:getPosition()
 	essharlc83 = CpuShip():setCallSign("ESSHARLC-83"):setTemplate("Aurora Class Landing Craft"):setScannedByFaction("EOC Starfleet"):setFaction("EOC Starfleet"):setPosition(hx, hy):setCanBeDestroyed(false):orderFlyFormation(odysseus, 200, 200)
-
+	addGMFunction("Dock Harbinger transport", dockTransport)
+	removeGMFunction("Harbinger transport")
 end
+
+  function dockTransport()
+	removeGMFunction("Dock Harbinger transport")
+	essharlc83:destroy()
+  end
