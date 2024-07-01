@@ -1,3 +1,4 @@
+
 -- Name: Odysseus utils
 -- Created by Ria B for Odysseus 2024
 
@@ -173,8 +174,22 @@ function spawn_wave(x, y, size, orders, tx, ty)
 
     --Spawn mothership
     if size == 6 then
-        mother = CpuShip():setCallSign(generateCallSign("UNREC-", nil)):setFaction("Machines"):setRotation(100):setTemplate("Machine Mothership"):setPosition(x, y):setScanned(true)
+        local lox, loy = odysseus:getPosition()
+        setMotherHeading = true
+        motherHeadingValue = math.floor(angleHeading(x,y, lox,loy)*1000)/1000
+        motherSpawnHeading = motherHeadingValue - 90
+        mother = CpuShip():setCallSign(generateCallSign("UNREC-", nil)):setFaction("Machines"):setHeading(motherSpawnHeading):setTemplate("Machine Mothership"):setPosition(x, y):setScanned(true)
         removeGMFunction("OC - Machine - XL + Mother")
         addGMFunction(_("Enemy", "Launch destruction"), function() cleanup_confirm() end)
+    end
+end
+
+function motherHeading()
+    local currentHeadingValue = math.floor(mother:getHeading()*1000)/1000
+
+    if currentHeadingValue >= motherHeadingValue+5 or currentHeadingValue <= motherHeadingValue-5 then
+        mother:setHeading(currentHeadingValue+0.011)
+    else
+        setMotherHeading = false
     end
 end

@@ -119,6 +119,14 @@ function update(delta)
     plotZ(delta)
   end
 
+  
+  --Scenario 18
+  if setMotherHeading == true then
+    motherHeading()
+  end
+
+
+
   --Scenario 18
 	if destroyEnemy then
 		cleanup(delta)
