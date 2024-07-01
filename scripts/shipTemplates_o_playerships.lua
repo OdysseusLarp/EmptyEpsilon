@@ -3,10 +3,10 @@ template = ShipTemplate():setName("Comet Starfighter"):setClass("Comet", "Starfi
 template:setRadarTrace("eoc_starfighter.png")
 --             Arc, Dir, Range, CycleTime, Dmg
 template:setBeam(0, 30, 0, 1200.0, 2.0, 30)
-template:setHull(200)
-template:setShields(400)
+template:setHull(100)
+template:setShields(250)
 template:setSpeed(80, 20, 40)
-template:setCombatManeuver(800, 500)
+template:setCombatManeuver(600, 200)
 template:setWarpSpeed(0)
 template:setJumpDrive(false)
 template:setCloaking(false)
@@ -14,7 +14,7 @@ template:setEnergyStorage(600)
 template:setTubes(2, 10.0) -- Amount of torpedo tubes, loading time
 template:setTubeDirection(0, 0)
 template:setTubeDirection(1, 0)
-template:setWeaponStorage("Homing", 250)
+template:setWeaponStorage("Homing", 25)
 
 template:setShortRangeRadarRange(7500)
 template:setLongRangeRadarRange(75000)
