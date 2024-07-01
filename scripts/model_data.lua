@@ -89,7 +89,7 @@ model:setName("machine_mother")
 model:setMesh("NewMotherShip.obj")
 model:setTexture("NewMothership_colorDiffuseCombi.png")
 model:setIllumination("NewMothership_emission.png")
-model:setScale(300)
+model:setScale(500)
 model:setRadius(4600)
 
 

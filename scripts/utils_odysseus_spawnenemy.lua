@@ -1,3 +1,4 @@
+
 -- Name: Odysseus utils
 -- Created by Ria B for Odysseus 2024
 
@@ -15,46 +16,54 @@ function spawn_wave(x, y, size, orders, tx, ty)
     local heading = tostring(math.floor(angleHeading(odysseus, x, y)))
     odysseus:addToShipLog(string.format(_("shipLog", "EVA sector scanner alarm. Multiple incoming jumps detected from heading %d. Unidentified vessels."), heading), "Red")
 
+    --Defines the random distance min-max length where the enemies are spawn from the point clicked on the map
     distanceMin = 1000;
-    distanceMax = 10000;
+    distanceMax = 5000;
     if size == 1 then
-        distanceMax = 10000;
+        distanceMax = 5000;
     end
     if size == 2 then
-        distanceMax = 20000;
+        distanceMax = 5000;
     end
     if size == 3 then
-        distanceMax = 20000;
+        distanceMax = 10000;
     end
     if size == 4 then
         distanceMax = 30000;
     end
     if size == 5 then
-        distanceMax = 40000;
+        distanceMax = 35000;
+    end
+    -- Mother's size is so huge, that it needs space in the middle, mother is spawn in the exact coordinates
+    if size == 6 then
+        distanceMin = 7500;
+        distanceMax = 50000;
     end
     
     --Spawn predator
     if size == 1 then
-        pMin = 2
-        pMax = 4
+        pMin = 3
+        pMax = 5
     end
     if size == 2 then
-        pMin = 4
-        pMax = 8
+        pMin = 6
+        pMax = 10
     end
     if size == 3 then
-        pMin = 9
-        pMax = 11
-    end
-    if size == 4 or size == 5 then
         pMin = 10
         pMax = 15
+    end
+    if size == 4 then
+        pMin = 15
+        pMax = 20
+    end
+    if size == 5 then
+        pMin = 20
+        pMax = 30
     end
     if size == 6 then
         pMin = 20
         pMax = 30
-        distanceMin = 20000;
-        distanceMax = 30000;
     end
 
     pc = irandom(pMin, pMax)
@@ -65,7 +74,7 @@ function spawn_wave(x, y, size, orders, tx, ty)
         y1 = y + math.sin(r / 180 * math.pi) * distance
         local machine = CpuShip():setCallSign(generateCallSign("UNREC-", nil)):setFaction("Machines"):setTemplate("Machine Predator"):setPosition(x1, y1)
         if orders == "target" then
-            machine:orderFlyTowardsBlind(tx,ty)
+            machine:orderDefendLocation(tx,ty)
         elseif orders == "idle" then
             machine:orderIdle()
         elseif orders == "boarding" then
@@ -78,23 +87,23 @@ function spawn_wave(x, y, size, orders, tx, ty)
     --Spawn Stinger
     --Very small 
     if size == 1 then
-        sMin = 0
-        sMax = 1
-    end
-    -- Small
-    if size == 2 then
         sMin = 1
         sMax = 2
     end
-    -- Medium
-    if size == 3 then
+    -- Small
+    if size == 2 then
         sMin = 2
         sMax = 4
     end
-    -- Large
-    if size == 4 then
+    -- Medium
+    if size == 3 then
         sMin = 4
         sMax = 6
+    end
+    -- Large
+    if size == 4 then
+        sMin = 6
+        sMax = 10
     end
     -- Massive or End
     if size == 5 then
@@ -104,8 +113,6 @@ function spawn_wave(x, y, size, orders, tx, ty)
     if size == 6 then
         sMin = 30
         sMax = 40
-        distanceMin = 10000;
-        distanceMax = 20000;
     end
 
     sc = irandom(sMin, sMax)
@@ -118,7 +125,7 @@ function spawn_wave(x, y, size, orders, tx, ty)
 
         local machine = CpuShip():setCallSign(generateCallSign("UNREC-", nil)):setFaction("Machines"):setTemplate("Machine Stinger"):setPosition(x1, y1)
         if orders == "target" then
-            machine:orderFlyTowardsBlind(tx,ty)
+            machine:orderDefendLocation(tx,ty)
         elseif orders == "idle" then
             machine:orderIdle()
         elseif orders == "boarding" then
@@ -131,20 +138,19 @@ function spawn_wave(x, y, size, orders, tx, ty)
     --Spawn Reaper
     if size == 4 or size == 5 or size == 6 then
         if size == 4 then
-            rMin = 1
-            rMax = 2
-            distanceMax = 10000;
+            rMin = 2
+            rMax = 3
+            distanceMax = 20000;
         end
         if size == 5  then 
             rMin = 4
             rMax = 8
-            distanceMax = 10000;
+            distanceMax = 30000;
         end
         if size == 6 then
             rMin = 10
             rMax = 20
-            distanceMin = 5000;
-            distanceMax = 10000;
+            distanceMax = 40000;
         end
         --randomize Reaper count
         rc = irandom(rMin, rMax)
@@ -155,7 +161,7 @@ function spawn_wave(x, y, size, orders, tx, ty)
             y1 = y + math.sin(r / 180 * math.pi) * distance    
             local machine = CpuShip():setCallSign(generateCallSign("UNREC-", nil)):setFaction("Machines"):setTemplate("Machine Reaper"):setPosition(x1, y1)
             if orders == "target" then
-                machine:orderFlyTowardsBlind(tx,ty)
+                machine:orderDefendLocation(tx,ty)
             else 
                 if orders == "idle" then
                     machine:orderIdle()
@@ -168,8 +174,22 @@ function spawn_wave(x, y, size, orders, tx, ty)
 
     --Spawn mothership
     if size == 6 then
-        mother = CpuShip():setCallSign(generateCallSign("UNREC-", nil)):setFaction("Machines"):setRotation(100):setTemplate("Machine Mothership"):setPosition(x, y):setScanned(true)
+        local lox, loy = odysseus:getPosition()
+        setMotherHeading = true
+        motherHeadingValue = math.floor(angleHeading(x,y, lox,loy)*1000)/1000
+        motherSpawnHeading = motherHeadingValue - 90
+        mother = CpuShip():setCallSign(generateCallSign("UNREC-", nil)):setFaction("Machines"):setHeading(motherSpawnHeading):setTemplate("Machine Mothership"):setPosition(x, y):setScanned(true)
         removeGMFunction("OC - Machine - XL + Mother")
         addGMFunction(_("Enemy", "Launch destruction"), function() cleanup_confirm() end)
+    end
+end
+
+function motherHeading()
+    local currentHeadingValue = math.floor(mother:getHeading()*1000)/1000
+
+    if currentHeadingValue >= motherHeadingValue+5 or currentHeadingValue <= motherHeadingValue-5 then
+        mother:setHeading(currentHeadingValue+0.011)
+    else
+        setMotherHeading = false
     end
 end
