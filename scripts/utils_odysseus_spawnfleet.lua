@@ -157,8 +157,8 @@ function jumpInDelta()
     end
 
     local shipTemplate = value.template
-    local xoff = value.xoff*distanceModifier
-    local yoff = value.yoff*distanceModifier
+    local xoff = value.xoff
+    local yoff = value.yoff
     local fleetform = value.fleetForm
      xset, yset, x1, y1 = calculateSpawnLocations(xoff, yoff)
             
@@ -248,17 +248,17 @@ end
 
 function calculateSpawnLocations(xloc, yloc)
 
-    local xset = xloc+irandom(-1000,1000)
-    local yset = yloc+irandom(-1000,1000)
+    local xset = xloc*distanceModifier*2+irandom(-1000,1000)
+    local yset = yloc*distanceModifier*2+irandom(-1000,1000)
 
     if randomizeSpawnLoc == false then
-        xset = xloc
-        yset = yloc
+        xset = xloc*distanceModifier*2
+        yset = xloc*distanceModifier*2
     end
 
     local r = irandom(0, 360)
-    local xdistance = irandom(-2000, 2000)    
-    local ydistance = irandom(-2000, 2000)    
+    local xdistance = irandom(-2000*positionModifier, 5000*positionModifier)    
+    local ydistance = irandom(-2000*positionModifier, 2000*positionModifier)    
 
     if randomizeSpawnLoc == false then
         xdistance = 0
@@ -347,14 +347,14 @@ end
 
 
 function confirm_vulture()
-	removeGMFunction("Destroy ESS Vulture")
+	removeGMFunction("Destroy OSS Vulture")
 	addGMFunction("Cancel destruction", cancel_vulture)
 	addGMFunction("Confirm destruction", destroy_vulture)
 
 end
 
 function cancel_vulture()
-	addGMFunction("Destroy ESS Vulture", confirm_vulture)
+	addGMFunction("Destroy OSS Vulture", confirm_vulture)
 	removeGMFunction("Cancel destruction")
 	removeGMFunction("Confirm destruction")
 end
@@ -377,7 +377,7 @@ function confirm_karma()
 end
 
 function cancel_karma()
-	addGMFunction("Destroy ESS Karma", confirm_karma)
+	addGMFunction("Destroy OSS Karma", confirm_karma)
 	removeGMFunction("Cancel destruction")
 	removeGMFunction("Confirm destruction")
 end
@@ -386,7 +386,7 @@ function destroy_karma()
 	removeGMFunction("Cancel destruction")
 	removeGMFunction("Confirm destruction") 
     local tx, ty = karma:getPosition()
-    karma:destroy()
+    karma:takeDamage(999999)
     ExplosionEffect():setPosition(tx,ty):setSize(500):setOnRadar(true)
 	odysseus:addToShipLog("EVA long range scanning results. OSS Karma left from scanner range. No jump detected.", "Red")
 end

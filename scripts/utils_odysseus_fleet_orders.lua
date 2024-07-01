@@ -4,13 +4,13 @@ function showEOC()
 end
 
 function showEOCOrders()
---    removeGMFunction('Show EOC orders')   
     addGMFunction(_("buttonGM", 'Hide EOC orders'), function() hideEOCorders() end)
+    addGMFunction(_("buttonGM", "Order Formation"), function() fleetFlyFormation() end)
+    addGMFunction(_("buttonGM", "Order Stand ground"), function() orderFleetIdle() end)
     addGMFunction(_("buttonGM", 'OC - Civilians'), function() civiliansRetreatOnClick() end)
     addGMFunction(_("buttonGM", 'OC - Military'), function() moveToFightOnClick() end)
     addGMFunction(_("buttonGM", 'OC - Move fleet'), function() moveFleetOnClick() end)
-    addGMFunction(_("buttonGM", "Order Formation"), function() fleetFlyFormation() end)
-    addGMFunction(_("buttonGM", "Order Idle"), function() orderFleetIdle() end)
+
 
     --Muokkaa fighterit OC:ksi
     addGMFunction(
@@ -61,8 +61,8 @@ end
 function civiliansRetreat(x,y)
     for key, object in ipairs(fleetObjectsIn) do
         if object:getFaction() ~= "EOC Starfleet" then
-            tx = x+math.floor(random(-5000, 5000))
-            ty = y+math.floor(random(-5000, 5000))
+            tx = x+math.floor(random(-10000, 10000))
+            ty = y+math.floor(random(-10000, 10000))
             object:orderFlyTowardsBlind(tx, ty)
         end
     end
@@ -79,8 +79,8 @@ end
 function moveToFight(x,y)
     for idx, object in ipairs(fleetObjectsIn) do
         if object:getFaction() == "EOC Starfleet" then
-            tx = x+math.floor(random(-5000, 5000))
-             ty = y+math.floor(random(-5000, 5000))
+            tx = x+math.floor(random(-10000, 10000))
+             ty = y+math.floor(random(-10000, 10000))
             object:orderDefendLocation(tx, ty)
         end
     end
@@ -102,7 +102,7 @@ end
 
 function fleetFlyFormation()
     flagship = aurora
-    flagship:orderIdle()
+    flagship:orderStandGround()
     for idx, object in ipairs(fleetObjectsIn) do
         local callsign = object:getCallSign()
         for key, value in ipairs(fleet_list) do    
@@ -120,7 +120,7 @@ end
 
 function orderFleetIdle()
     for idx, object in ipairs(fleetObjectsIn) do
-        object:orderIdle()
+        object:orderStandGround()
     end
 end
 

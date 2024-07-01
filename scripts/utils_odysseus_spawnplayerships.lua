@@ -52,7 +52,15 @@ function setFighterSyncButtons()
 		odysseus:removeCustom("launch_pad_4")
 		spawn_starcaller()
 	end
-	
+
+	--Ship breaking
+	function break_essody18()
+		odysseus:setLandingPadDestroyed(1)
+		allow_autodock18 = false
+		status_essody18 = 0 	--0 = 'Destroyed', 1 = 'Docked', 2 = 'Launched'
+		removeGMFunction("Force dock ESSODY-F18")
+		addGMFunction("Fix ESSODY-F18", allow_essody18)
+	end
 	-- Ship spawner
 	function spawn_essody18()
 		x, y = odysseus:getPosition()
@@ -62,12 +70,14 @@ function setFighterSyncButtons()
 			allow_autodock18 = false
 			status_essody18 = 0 	--0 = 'Destroyed', 1 = 'Docked', 2 = 'Launched'
 			removeGMFunction("Force dock ESSODY-F18")
+			removeGMFunction("Break ESSODY-F18")
 			addGMFunction("Fix ESSODY-F18", allow_essody18)
 		end)
 		allow_autodock18 = true
 		odysseus:addCustomButton("Relay", "dock_to_odysseus_auto18", "Autodock ESSODY-F18", dock_essody18_auto)
 		essody18:addCustomButton("Helms", "dock_to_odysseus", "Dock to Odysseys", dock_essody18)
 		addGMFunction("Force dock ESSODY-F18", dock_essody18_force)
+		addGMFunction("Break ESSODY-F18", break_essody18)
 		  odysseus:setLandingPadLaunched(1)
 		essody18_launched = 1
 		status_essody18 = 2	--0 = 'Destroyed', 1 = 'Docked', 2 = 'Launched'
@@ -81,12 +91,14 @@ function setFighterSyncButtons()
 			  allow_autodock23 = false
 			  status_essody23 = 0	--0 = 'Destroyed', 1 = 'Docked', 2 = 'Launched'
 			removeGMFunction("Force dock ESSODY-F23")
+			removeGMFunction("Break ESSODY-F23")
 			  addGMFunction("Fix ESSODY-F23", allow_essody23)
 		end)
 		allow_autodock23 = true
 		odysseus:addCustomButton("Relay", "dock_to_odysseus_auto23", "Autodock ESSODY-F23", dock_essody23_auto)
 		essody23:addCustomButton("Helms", "dock_to_odysseus", "Dock to Odysseys", dock_essody23)
 		addGMFunction("Force dock ESSODY-F23", dock_essody23_force)
+		addGMFunction("Break ESSODY-F23", break_essody23)
 		odysseus:setLandingPadLaunched(2)
 		essody23_launched = 1
 		status_essody23 = 2	--0 = 'Destroyed', 1 = 'Docked', 2 = 'Launched'
@@ -99,12 +111,14 @@ function setFighterSyncButtons()
 			  allow_autodock36 = false
 			  status_essody36 = 0	--0 = 'Destroyed', 1 = 'Docked', 2 = 'Launched'
 			removeGMFunction("Force dock ESSODY-F36")
-			  addGMFunction("Fix ESSODY-F36", allow_essody36)
+			removeGMFunction("Break ESSODY-F36")
+			  addGMFunction("Fix ESSODY-F23", allow_essody36)
 		end)
 		allow_autodock36 = true
 		odysseus:addCustomButton("Relay", "dock_to_odysseus_auto36", "Autodock ESSODY-F36", dock_essody36_auto)
 		essody36:addCustomButton("Helms", "dock_to_odysseus", "Dock to Odysseys", dock_essody36)
 		addGMFunction("Force dock ESSODY-F36", dock_essody36_force)
+		addGMFunction("Break ESSODY-F36", break_essody36)
 		  odysseus:setLandingPadLaunched(3)
 		essody36_launched = 1
 		status_essody36 = 2	--0 = 'Destroyed', 1 = 'Docked', 2 = 'Launched'
@@ -115,6 +129,7 @@ function setFighterSyncButtons()
 		starcaller = PlayerSpaceship():setFaction("EOC_Starfleet"):setTemplate("Comet Class Scout"):setCanSelfDestruct(false):setPosition(x - 400, y + 400):setCallSign("ESS Starcaller"):setAutoCoolant(true):onDestruction(
 		function(this, instigator)
 			removeGMFunction("Force dock Starcaller")
+			removeGMFunction("Break Starcaller")
 			  odysseus:setLandingPadDestroyed(4)
 			  allow_autodocksc = false
 			  status_starcaller = 0	--0 = 'Destroyed', 1 = 'Docked', 2 = 'Launched'
@@ -124,11 +139,30 @@ function setFighterSyncButtons()
 		odysseus:addCustomButton("Relay", "dock_to_odysseus_autosc", "Autodock Starcaller", dock_starcaller_auto)
 		starcaller:addCustomButton("Helms", "dock_to_odysseus", "Dock to Odysseys", dock_starcaller)
 		addGMFunction("Force dock Starcaller", dock_starcaller_force)
+		addGMFunction("Break Starcaller", break_starcaller)
 		  odysseus:setLandingPadLaunched(4)
 		starcaller_launched = 1
 		status_starcaller = 2	--0 = 'Destroyed', 1 = 'Docked', 2 = 'Launched'
 	end
 	
+			--Ship breaking
+			function break_essody18()
+				essody18:takeDamage(999999)
+			end
+		
+				function break_essody23()
+					essody23:takeDamage(999999)
+				end
+		
+				function break_essody36()
+					essody36:takeDamage(999999)
+				end
+		
+				function break_starcaller()
+					starcaller:takeDamage(999999)
+				end
+
+
 	-- Ship docker
 	dockingdist = 800   --Set docking distance to 0.8U
 	

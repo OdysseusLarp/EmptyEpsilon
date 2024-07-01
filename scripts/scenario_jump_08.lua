@@ -17,11 +17,11 @@ function init()
 
 	local sx = -5000
 	local sy = 4500
-	setSpawnFleetButton(2, nil, sx, sy, 2, 2, true, "formation", 0, 2, 0, 1)
+	setSpawnFleetButton(2, nil, sx, sy, 2, 2, true, "idle", 0, 2, 0, 1)
 
 	-- Spawnwave(distance from Odysseus, enemy size)
 	addGMFunction(_("Enemy", "OC - Machine - L"), function() spawnwave(4) end)
-	addGMFunction(_("Enemy", "OC - Machine - Backup XS"), function() spawnwave(1) end)
+	addGMFunction(_("Enemy", "OC - Machine - Backup S"), function() spawnwave(2) end)
 
 	-- Generate scenario map
 	generateSpace(sx, sy)

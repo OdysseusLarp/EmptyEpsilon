@@ -15,7 +15,7 @@ function init()
 
 	local sx = -5000
 	local sy = 6500
-	setSpawnFleetButton(3, nil, sx, sy, 2, 1, true, "formation", 0, 3, 0, 3)
+	setSpawnFleetButton(3, nil, sx, sy, 2, 1, true, "idle", 0, 3, 0, 3)
 
 	-- Spawnface parameters: (distance from Odysseus, enemyfleetsize)
 	-- 1 = very small, 2 = small, 3 = mdium, 4 = large, 5 = massive, 6 = end fleet
@@ -33,6 +33,5 @@ function init()
 	planet = setUpPlanet("P-OC04-YU08", ox+20000, oy-53000, 1.4)
 
 	addGMFunction("Destroy OSS Karma", confirm_karma)
-
 
 end
