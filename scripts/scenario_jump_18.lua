@@ -28,8 +28,8 @@ function init()
 	end)
 	local sx = 10000
 	local sy = -14500
-	setSpawnFleetButton(5, "A", sx, sy, 2, 3, true, "idle", 0, 3, 0, 3)
-	setSpawnFleetButton(5, "B", sx, sy, 2, 3, true, "idle", 0, 3, 0, 3)
+	setSpawnFleetButton(5, "A", sx, sy, 2, 2, true, "idle", 0, 3, 0, 3)
+	setSpawnFleetButton(5, "B", sx, sy, 2, 2, true, "idle", 0, 3, 0, 3)
 
 	-- Spawnface parameters: (distance from Odysseus, enemyfleetsize)
 	-- 1 = very small, 2 = small, 3 = mdium, 4 = large, 5 = massive, 6 = end fleet
@@ -97,8 +97,10 @@ function cleanup(delta)
 	if starcaller:isValid() then
 		x,y = mother:getPosition()
 		host = Asteroid():setPosition(x, y)
+		mother:takeDamage(999999999)
 		starcaller:destroy()
-		mother:destroy()
+		ElectricExplosionEffect():setPosition(x,y):setSize(10000):setOnRadar(true)
+--		mother:destroy()
 	end
 	x, y = host:getPosition()
 
@@ -108,13 +110,14 @@ function cleanup(delta)
 			faction = obj:getFaction()	
 
 			if faction == "Machines" then
-				--obj:destroy()
+				ElectricExplosionEffect():setPosition(x,y):setSize(500):setOnRadar(true)
 				obj:takeDamage(999999999)
 				enemyKills = enemyKills + 1
 			end
 
 			if enemyKills >= enemyCount then
 				destroyEnemy = false
+				idleMachines()
 				odysseus:addToShipLog("EVA sector scanner report. Major explosion detected.", "Red")
 				odysseus:addToShipLog("EVA sector scanner report. Hostiles immobilized.", "Red")
 				return
@@ -133,7 +136,19 @@ function cleanup(delta)
 
 	if enemyKills >= enemyCount then
 		destroyEnemy = false
+		idleMachines()
 		odysseus:addToShipLog("EVA sector scanner report. Major explosion detected.", "Red")
 		odysseus:addToShipLog("EVA sector scanner report. Hostiles immobilized.", "Red")
+	end
+end
+
+function idleMachines()
+	for _, obj in ipairs(getAllObjects()) do
+
+		faction = obj:getFaction()
+
+		if faction == "Machines" then
+			obj:orderIdle()
+		end
 	end
 end

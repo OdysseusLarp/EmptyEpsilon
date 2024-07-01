@@ -180,16 +180,20 @@ function spawn_wave(x, y, size, orders, tx, ty)
         motherSpawnHeading = motherHeadingValue - 90
         mother = CpuShip():setCallSign(generateCallSign("UNREC-", nil)):setFaction("Machines"):setHeading(motherSpawnHeading):setTemplate("Machine Mothership"):setPosition(x, y):setScanned(true)
         removeGMFunction("OC - Machine - XL + Mother")
-        addGMFunction(_("Enemy", "Launch destruction"), function() cleanup_confirm() end)
     end
 end
 
 function motherHeading()
     local currentHeadingValue = math.floor(mother:getHeading()*1000)/1000
 
+    if mother:isValid() == false then
+        setMotherHeading = false
+    end
     if currentHeadingValue >= motherHeadingValue+5 or currentHeadingValue <= motherHeadingValue-5 then
         mother:setHeading(currentHeadingValue+0.011)
     else
+        addGMFunction(_("Enemy", "Launch destruction"), function() cleanup_confirm() end)
+
         setMotherHeading = false
     end
 end
