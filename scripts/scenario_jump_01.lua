@@ -26,7 +26,15 @@ function init()
 	-- FX and FY parameters which to avoid when creating random space
 	generateSpace(fx, fy)
 
-	-- Lisää päälle nebula
+	for n=1, 50 do
+		local r = irandom(0, 360)
+		local distance = irandom(1000, 20000)
+		x1 = ox+63000 + math.cos(r / 180 * math.pi) * distance
+		y1 = oy-25000 + math.sin(r / 180 * math.pi) * distance
+		Asteroid():setPosition(x1, y1):setSize(random(100, 500))
+	end
+
+
 	Nebula():setPosition(fx+2000, fy-1000)
 	local station = SpaceStation():setFaction("EOC Starfleet"):setTemplate("Medium station"):setCallSign("Solaris 7"):setPosition(fx, fy)
 

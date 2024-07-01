@@ -27,4 +27,12 @@ function init()
 
 	generateSpace(sx, sy)
 
+	for n=1, 50 do
+		local r = irandom(0, 360)
+		local distance = irandom(1000, 20000)
+		x1 = ox+63000 + math.cos(r / 180 * math.pi) * distance
+		y1 = oy-25000 + math.sin(r / 180 * math.pi) * distance
+		Asteroid():setPosition(x1, y1):setSize(random(100, 500))
+	end
+
 end
