@@ -11,10 +11,10 @@ template:setWarpSpeed(0)
 template:setJumpDrive(false)
 template:setCloaking(false)
 template:setEnergyStorage(600)
-template:setTubes(2, 10.0) -- Amount of torpedo tubes, loading time
+template:setTubes(2, 4.0) -- Amount of torpedo tubes, loading time
 template:setTubeDirection(0, 0)
 template:setTubeDirection(1, 0)
-template:setWeaponStorage("Homing", 25)
+template:setWeaponStorage("Homing", 20)
 
 template:setShortRangeRadarRange(7500)
 template:setLongRangeRadarRange(75000)
