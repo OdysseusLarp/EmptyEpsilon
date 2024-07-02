@@ -176,24 +176,24 @@ function spawn_wave(x, y, size, orders, tx, ty)
     if size == 6 then
         local lox, loy = odysseus:getPosition()
         setMotherHeading = true
-        motherHeadingValue = math.floor(angleHeading(x,y, lox,loy)*1000)/1000
+        motherHeadingValue = angleHeading(x,y, lox,loy)
         motherSpawnHeading = motherHeadingValue - 90
-        mother = CpuShip():setCallSign(generateCallSign("UNREC-", nil)):setFaction("Machines"):setHeading(motherSpawnHeading):setTemplate("Machine Mothership"):setPosition(x, y):setScanned(true)
+        mother = CpuShip():setCallSign(generateCallSign("UNREC-", nil)):setFaction("Machines"):setHeading(motherSpawnHeading):setTemplate("Machine Mothership"):setPosition(x, y):setScanned(true):orderAttack(odysseus)
         removeGMFunction("OC - Machine - XL + Mother")
     end
 end
 
 function motherHeading()
-    local currentHeadingValue = math.floor(mother:getHeading()*1000)/1000
+    local currentHeadingValue = mother:getHeading()
 
     if mother:isValid() == false then
         setMotherHeading = false
     end
-    if currentHeadingValue >= motherHeadingValue+5 or currentHeadingValue <= motherHeadingValue-5 then
-        mother:setHeading(currentHeadingValue+0.011)
-    else
+
+    if currentHeadingValue <= motherHeadingValue+10 and currentHeadingValue >= motherHeadingValue-10 then
+        mother:orderIdle()
+        setMotherHeading = false
         addGMFunction(_("Enemy", "Launch destruction"), function() cleanup_confirm() end)
 
-        setMotherHeading = false
     end
 end
