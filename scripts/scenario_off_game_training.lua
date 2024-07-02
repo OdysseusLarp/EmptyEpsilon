@@ -6,6 +6,9 @@ require("utils.lua")
 require("utils_odysseus.lua")
 
 function init()
+	addGMFunction(_("buttonGM", "OC - Machine - XS"), function() spawnwave(1) end)
+    addGMFunction(_("buttonGM", "OC - Machine - S"), function() spawnwave(2) end)
+
 
 	resetScen()
 
@@ -28,8 +31,8 @@ function resetScen()
 
     Nebula():setPosition(13657, 5143)
     Nebula():setPosition(15088, 9924)
-    CpuShip():setFaction("Corporate owned"):setTemplate("Medium station"):setCallSign("VS2"):setPosition(23148, -5093):orderRoaming()
-    CpuShip():setFaction("Corporate owned"):setTemplate("Helios Class Corvette"):setCallSign("NC3"):setPosition(15926, -7037):setWeaponStorage("Homing", 4)
+    station = CpuShip():setTemplate("Medium station"):setCallSign("VS2"):setPosition(23148, 5093)
+    CpuShip():setFaction("Corporate owned"):setTemplate("Helios Class Corvette"):setCallSign("NC3"):setPosition(15926, -7037):setWeaponStorage("Homing", 4):orderStandGround()
     Asteroid():setPosition(6574, -5741)
     Asteroid():setPosition(6667, 6019)
     Asteroid():setPosition(8704, -3889)
@@ -51,8 +54,10 @@ function resetScen()
     Asteroid():setPosition(-4259, 17315)
     Asteroid():setPosition(9074, 18796)
     Asteroid():setPosition(27593, -28796)
-    CpuShip():setFaction("Machines"):setTemplate("Machine Predator"):setCallSign("CV5"):setPosition(20370, 8845)
-    CpuShip():setFaction("Machines"):setTemplate("Machine Stinger"):setCallSign("CSS6"):setPosition(20056, 14553)
+    CpuShip():setFaction("Machines"):setTemplate("Machine Predator"):setCallSign("CV5"):setPosition(45370, -18845):orderStandGround()
+    CpuShip():setFaction("Machines"):setTemplate("Machine Stinger"):setCallSign("CSS6"):setPosition(45056, -14553):orderStandGround()
+    heading = tostring(math.floor(angleHeading(odysseus, station)))
+    odysseus:addToShipLog(string.format(_("shipLog", "EVA sector scanner alarm. Unknown radiosignal detected from heading %d."), heading), "Red")
 
 
 end
