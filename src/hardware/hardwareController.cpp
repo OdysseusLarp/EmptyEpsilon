@@ -15,6 +15,15 @@
 
 #include "hardwareMappingEffects.h"
 
+extern bool g_isDmxEnabled;
+
+REGISTER_SCRIPT_CLASS(HardwareController)
+{
+    REGISTER_SCRIPT_CLASS_FUNCTION(HardwareController, enableDmx);
+    REGISTER_SCRIPT_CLASS_FUNCTION(HardwareController, disableDmx);
+    REGISTER_SCRIPT_CLASS_FUNCTION(HardwareController, isDmxEnabled);
+}
+
 HardwareController::~HardwareController()
 {
     for(HardwareOutputDevice* device : devices)
@@ -249,8 +258,15 @@ void HardwareController::update(float delta)
     int idx = 0;
     for(HardwareOutputDevice* device : devices)
     {
-        for(int n=0; n<device->getChannelCount(); n++)
-            device->setChannelData(n, channels[idx++]);
+        for(int n=0; n<device->getChannelCount(); n++) {
+            // Only send data if DMX is enabled or the channel is 1 (HasShip heartbeat signal)
+            if (g_isDmxEnabled || idx == 0) {  // idx == 0 corresponds to channel 1
+                device->setChannelData(n, channels[idx]);
+            } else {
+                device->setChannelData(n, 0.0f);  // Ensure other channels are set to 0.0
+            }
+            idx++;
+        }
     }
 }
 
@@ -413,4 +429,18 @@ bool HardwareController::getVariableValue(string variable_name, float& value)
     LOG(WARNING) << "Unknown variable: " << variable_name;
     value = 0.0;
     return false;
+}
+
+bool HardwareController::isDmxEnabled() const {
+    return g_isDmxEnabled;
+}
+
+void HardwareController::enableDmx() {
+    g_isDmxEnabled = true;
+    LOG(INFO) << "DMX output enabled.";
+}
+
+void HardwareController::disableDmx() {
+    g_isDmxEnabled = false;
+    LOG(INFO) << "DMX output disabled.";
 }

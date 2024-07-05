@@ -65,6 +65,10 @@ public:
     virtual void update(float delta) override;
 
     bool getVariableValue(string variable_name, float& value);
+
+    bool isDmxEnabled() const;
+    void enableDmx();
+    void disableDmx();
 private:
     void handleConfig(string section, std::unordered_map<string, string>& settings);
     void createNewHardwareMappingState(int channel_number, std::unordered_map<string, string>& settings);

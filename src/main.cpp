@@ -75,6 +75,8 @@ GUI_REGISTER_LAYOUT("verticalbottom", GuiLayoutVerticalBottom);
 GUI_REGISTER_LAYOUT("horizontal", GuiLayoutHorizontal);
 GUI_REGISTER_LAYOUT("horizontalright", GuiLayoutHorizontalRight);
 
+bool g_isDmxEnabled = true;
+
 int main(int argc, char** argv)
 {
 #ifdef __APPLE__
