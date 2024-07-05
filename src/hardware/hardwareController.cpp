@@ -6,6 +6,9 @@
 #include "spaceObjects/nebula.h"
 #include "spaceObjects/warpJammer.h"
 
+#include <unordered_map>
+#include <unordered_set>
+
 #include "devices/dmx512SerialDevice.h"
 #include "devices/enttecDMXProDevice.h"
 #include "devices/virtualOutputDevice.h"
@@ -15,13 +18,14 @@
 
 #include "hardwareMappingEffects.h"
 
-extern bool g_isDmxEnabled;
+extern bool g_isDamageDmxEnabled;
+extern std::unordered_map<std::string, int> g_channelMapping;
 
 REGISTER_SCRIPT_CLASS(HardwareController)
 {
-    REGISTER_SCRIPT_CLASS_FUNCTION(HardwareController, enableDmx);
-    REGISTER_SCRIPT_CLASS_FUNCTION(HardwareController, disableDmx);
-    REGISTER_SCRIPT_CLASS_FUNCTION(HardwareController, isDmxEnabled);
+    REGISTER_SCRIPT_CLASS_FUNCTION(HardwareController, enableDamageDmx);
+    REGISTER_SCRIPT_CLASS_FUNCTION(HardwareController, disableDamageDmx);
+    REGISTER_SCRIPT_CLASS_FUNCTION(HardwareController, isDamageDmxEnabled);
 }
 
 HardwareController::~HardwareController()
@@ -259,11 +263,10 @@ void HardwareController::update(float delta)
     for(HardwareOutputDevice* device : devices)
     {
         for(int n=0; n<device->getChannelCount(); n++) {
-            // Only send data if DMX is enabled or the channel is 1 (HasShip heartbeat signal)
-            if (g_isDmxEnabled || idx == 0) {  // idx == 0 corresponds to channel 1
+            if (g_isDamageDmxEnabled || !isDamageChannel(n + 1)) {
                 device->setChannelData(n, channels[idx]);
             } else {
-                device->setChannelData(n, 0.0f);  // Ensure other channels are set to 0.0
+                device->setChannelData(n, 0.0f); // Ensure other channels are set to 0.0
             }
             idx++;
         }
@@ -431,16 +434,25 @@ bool HardwareController::getVariableValue(string variable_name, float& value)
     return false;
 }
 
-bool HardwareController::isDmxEnabled() const {
-    return g_isDmxEnabled;
+bool HardwareController::isDamageChannel(int channel) const {
+    for (const auto& pair : g_channelMapping) {
+        if (pair.second == channel) {
+            return true;
+        }
+    }
+    return false;
 }
 
-void HardwareController::enableDmx() {
-    g_isDmxEnabled = true;
-    LOG(INFO) << "DMX output enabled.";
+bool HardwareController::isDamageDmxEnabled() const {
+    return g_isDamageDmxEnabled;
 }
 
-void HardwareController::disableDmx() {
-    g_isDmxEnabled = false;
-    LOG(INFO) << "DMX output disabled.";
+void HardwareController::enableDamageDmx() {
+    g_isDamageDmxEnabled = true;
+    LOG(INFO) << "Damage DMX output enabled.";
+}
+
+void HardwareController::disableDamageDmx() {
+    g_isDamageDmxEnabled = false;
+    LOG(INFO) << "Damage DMX output disabled.";
 }

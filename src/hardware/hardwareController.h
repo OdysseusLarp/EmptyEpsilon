@@ -6,6 +6,8 @@
 #include "timer.h"
 #include "Updatable.h"
 
+#include <unordered_map>
+#include <unordered_set>
 
 class HardwareOutputDevice;
 class HardwareMappingEffect;
@@ -56,6 +58,7 @@ private:
     std::vector<HardwareMappingState> states;
     std::vector<HardwareMappingEvent> events;
     std::vector<float> channels;
+    bool isDamageChannel(int channel) const;
 public:
     HardwareController() = default;
     ~HardwareController();
@@ -66,9 +69,9 @@ public:
 
     bool getVariableValue(string variable_name, float& value);
 
-    bool isDmxEnabled() const;
-    void enableDmx();
-    void disableDmx();
+    bool isDamageDmxEnabled() const;
+    void enableDamageDmx();
+    void disableDamageDmx();
 private:
     void handleConfig(string section, std::unordered_map<string, string>& settings);
     void createNewHardwareMappingState(int channel_number, std::unordered_map<string, string>& settings);

@@ -75,7 +75,12 @@ GUI_REGISTER_LAYOUT("verticalbottom", GuiLayoutVerticalBottom);
 GUI_REGISTER_LAYOUT("horizontal", GuiLayoutHorizontal);
 GUI_REGISTER_LAYOUT("horizontalright", GuiLayoutHorizontalRight);
 
-bool g_isDmxEnabled = true;
+bool g_isDamageDmxEnabled = true;
+std::unordered_map<std::string, int> g_channelMapping = {
+    {"sHullTakesDamage", 3},
+    {"sFShieldTakesDamage", 4},
+    {"sRShieldTakesDamage", 5}
+};
 
 int main(int argc, char** argv)
 {
