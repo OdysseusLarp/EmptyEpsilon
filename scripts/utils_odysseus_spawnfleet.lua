@@ -1,7 +1,7 @@
 
 -- Max fighter count for NPC ships. Resets at every jump.
 function setSpawnFleetButton(fleetSpawn, fleetVariation, sx, sy, offSetModifier, spawnModifier, revealCallSigns, orders, delayInMin, delayInMax, delayOutMin, delayOutMax)
-     
+
     spawnDebugLog = false
     randomizeSpawnLoc = true
 
@@ -19,11 +19,9 @@ function setSpawnFleetButton(fleetSpawn, fleetVariation, sx, sy, offSetModifier,
         fleetbuttonName = fleetbuttonName .. fleetVariation
     end
 
-
     fleetRevealCallSigns = revealCallSigns 
     fleetOrders = orders
     fleetSpawnSet = fleetSpawn
-    fleetVariationSet = fleetVariation
     fsx = sx
     fsy = sy
 
@@ -39,7 +37,7 @@ function setSpawnFleetButton(fleetSpawn, fleetVariation, sx, sy, offSetModifier,
         setFleetTable()
     end
 
-    addGMFunction(_("Fleet", fleetbuttonName), function() jumpInPrep() end)
+    addGMFunction(_("Fleet", fleetbuttonName), function() jumpInPrep(fleetVariation) end)
 
 end
 
@@ -60,7 +58,7 @@ function setFleetTable()
     table.insert(fleet_list,12,{spawnorder=12,name='UNREC-387',military=false,callsign="OSS Vulture",faction="Corporate owned",xoff=-8000,yoff=3000,aiset="evasive",template="Helios Class Corvette",fleetForm=1,fleetVariation={"A", "B"}})
     table.insert(fleet_list,13,{spawnorder=13,name='UNREC-289',military=false,callsign="ESS Memory",faction="Government owned",xoff=-5000,yoff=-1500,aiset="evasive",template="Helios Class Corvette",fleetForm=5,fleetVariation={"A", "B"}})
     table.insert(fleet_list,14,{spawnorder=14,name='UNREC-294',military=false,callsign="CSS Prophet",faction="Faith of the High Science",xoff=-7000,yoff=1500,aiset="evasive",template="Aurora Class Explorer",fleetForm=3,fleetVariation={"A", "B"}})
-    table.insert(fleet_list,15,{spawnorder=15,name='UNREC-285',military=false,callsign="OSS Karma",faction="Unregistered",xoff=-7000,yoff=-1500,aiset="evasive",template="Aurora Class Explorer",fleetForm=5,fleetVariation={"A"}})
+    table.insert(fleet_list,15,{spawnorder=15,name='UNREC-285',military=false,callsign="OSS Karma",faction="Unregistered",xoff=-7000,yoff=-1500,aiset="evasive",template="Aurora Class Explorer",fleetForm=5,fleetVariation={"A", "X"}})
     table.insert(fleet_list,16,{spawnorder=16,name='UNREC-286',military=false,callsign="OSS Marauder",faction="Corporate owned",xoff=-12000,yoff=0,aiset="evasive",template="Aurora Class Explorer",fleetForm=5,fleetVariation={"A", "B"}})
     table.insert(fleet_list,17,{spawnorder=17,name='UNREC-261',military=false,callsign="ESS Discovery",faction="Government owned",xoff=-9000,yoff=0,aiset="evasive",template="Helios Class Corvette",fleetForm=5,fleetVariation={"A", "B"}})
     table.insert(fleet_list,18,{spawnorder=18,name='UNREC-355',military=false,callsign="CSS Whirlwind",faction="Corporate owned",xoff=-8000,yoff=-3000,aiset="evasive",template="Helios Class Corvette",fleetForm=5,fleetVariation={"A", "B"}})
@@ -80,11 +78,12 @@ end
 
 -- Calculates values based on ship locations and sets jumpFleetStatus to "jumpIn"
 -- update(delta) at utils_odysseus.lua calls spawnfleetDelta
-function jumpInPrep()
+function jumpInPrep(fleetVariation)
     if spawnDebugLog then
-        print("Func: jumpInPrep - Global In:", fleetSpawnSet, fleetVariationSet,  fsx, fsy, distanceModifier, positionModifier, fleetRevealCallSigns, fleetOrders, jumpDelayInMin, jumpDelayInMax, jumpDelayOutMin, jumpDelayOutMax)
+        print("Func: jumpInPrep - Global In:", fleetSpawnSet, fleetVariation, fsx, fsy, distanceModifier, positionModifier, fleetRevealCallSigns, fleetOrders, jumpDelayInMin, jumpDelayInMax, jumpDelayOutMin, jumpDelayOutMax)
     end    
 
+    fleetVariationSet = fleetVariation
     nextJumpInAt = getScenarioTime()
 
     ox, oy = odysseus:getPosition()
@@ -122,8 +121,6 @@ end
 -- Called by update(delta) which is located in utils_odysseus.lua
 function jumpInDelta()
 
-
-
     if fleetCountIn > fleetSize then
         fleetJumpStatus = "jumpInAfter"
         print("Func: jumpInDelta - Error occured, didn't stop to last ship")
@@ -141,7 +138,7 @@ function jumpInDelta()
         local shipfleetForm = value.fleetForm
         local shipfleetVariation = value.fleetVariation
 
-        local spawnValue = checkFleetSpawn(fleetSpawnSet, fleetVariationSet, shipfleetForm, shipfleetVariation)
+        local spawnValue = checkFleetSpawn(value.callsign, fleetSpawnSet, fleetVariationSet, shipfleetForm, shipfleetVariation)
 
         if spawnValue == false then
             return
@@ -392,14 +389,16 @@ function destroy_karma()
 end
 
 
-function checkFleetSpawn(fleetSpawnSet, fleetVariation, shipfleetForm, shipfleetVariation)
+function checkFleetSpawn(callSign, fleetSpawnSet, fleetVariationSet, shipfleetForm, shipfleetVariation)
 
+--print(callSign, fleetSpawnSet, fleetVariationSet, shipfleetForm, shipfleetVariation)
     if fleetSpawnSet <= shipfleetForm then
-        if fleetVariation ~= nil then
+        if fleetVariationSet ~= nil then
             local shipVariation = in_array(fleetVariationSet, shipfleetVariation)
+--            print(callSign, fleetVariationSet, shipfleetVariation, shipVariation)
            if shipVariation == true then
                 return true
-            end
+           end
         else
             return true
         end
