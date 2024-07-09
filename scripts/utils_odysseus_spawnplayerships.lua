@@ -174,6 +174,7 @@ function setFighterSyncButtons()
 			odysseus:addCustomButton("Relay", "launch_pad_1", "Launch ESSODY-F18", launch_essody18)
 			odysseus:removeCustom("dock_to_odysseus_auto18")
 			removeGMFunction("Force dock ESSODY-F18")
+			removeGMFunction("Break ESSODY-F18")
 			essody18:destroy()
 			status_essody18 = 1	--0 = 'Destroyed', 1 = 'Docked', 2 = 'Launched'
 			allow_autodock18 = false
@@ -190,6 +191,8 @@ function setFighterSyncButtons()
 			odysseus:addCustomButton("Relay", "launch_pad_2", "Launch ESSODY-F23", launch_essody23)
 			removeGMFunction("Force dock ESSODY-F23")
 			odysseus:removeCustom("dock_to_odysseus_auto23")
+			removeGMFunction("Break ESSODY-F23")
+
 			essody23:destroy()
 			status_essody23 = 1	--0 = 'Destroyed', 1 = 'Docked', 2 = 'Launched'
 			allow_autodock23 = false
@@ -205,6 +208,7 @@ function setFighterSyncButtons()
 			   odysseus:setLandingPadDocked(3)
 			odysseus:addCustomButton("Relay", "launch_pad_3", "Launch ESSODY-F36", launch_essody36)
 			removeGMFunction("Force dock ESSODY-F36")
+			removeGMFunction("Break ESSODY-F36")
 			odysseus:removeCustom("dock_to_odysseus_auto36")
 			essody36:destroy()
 			status_essody36 = 1	--0 = 'Destroyed', 1 = 'Docked', 2 = 'Launched'

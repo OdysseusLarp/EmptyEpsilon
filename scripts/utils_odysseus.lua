@@ -134,6 +134,23 @@ function update(delta)
 end
 
 
+function spawnCherryOnClick()
+	onGMClick(function(x, y)
+        onGMClick(nil)
+        spawnCherry(x, y)
+    end)
+  end
+
+  function spawnCherry(x, y)
+	cherry = CpuShip():setCallSign("Cherry"):setFaction("Unregistered"):setTemplate("Machine Stinger"):setPosition(x, y):setCanBeDestroyed(false):orderDock(odysseus, 200, 200)
+	addGMFunction("Dock Cherry", dockCherry)
+end
+
+  function dockCherry()
+	removeGMFunction("Dock Cherry")
+	cherry:destroy()
+  end
+
 
 function pairsByKeys(t, f)
     local a = {}

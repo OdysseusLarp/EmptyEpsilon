@@ -25,6 +25,6 @@ function init()
 	generateSpace(ox, oy)
 
 	--Scenario specific space objects
-	local jumpPoint = CpuShip():setFaction("EOC Starfleet"):setTemplate("Jump point"):setPosition(ox-9000, oy-7500):setCallSign("Jump point - A3"):setCanBeDestroyed(true):setScannedByFaction("EOC Starfleet", true)
+	local jumpPoint = CpuShip():setFaction("EOC_Starfleet"):setTemplate("Jump point"):setPosition(ox-9000, oy-7500):setCallSign("Jump point - A3"):setCanBeDestroyed(true):setScannedByFaction("EOC Starfleet", true)
 end
 

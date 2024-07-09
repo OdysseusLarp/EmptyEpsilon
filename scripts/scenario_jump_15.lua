@@ -13,6 +13,9 @@ function init()
 	local oy = 20000
 	odysseus:setPosition(ox, oy)
 
+	addGMFunction("OC - Spawn Cherry", spawnCherryOnClick)
+
+
 	-- Add GM common functions - Order of the buttons: Sync, fleet, enemies, Scenario change, scenario specific
 	local sx = -10000
 	local sy = 8500
