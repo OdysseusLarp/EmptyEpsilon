@@ -112,9 +112,9 @@ function jumpInPrep(fleetVariation)
         removeGMFunction(fleetbuttonName) 
     end
     if fleetRevealCallSigns == false then 
-        odysseus:addToShipLog(string.format(_("shipLog", "EVA sector scanner alarm. Multiple incoming jumps detected from heading %d. Unidentified vessels."), heading), "Red")
+        odysseus:addToShipLog(string.format(_("shipLog", "EVA sector scanner alarm. Multiple incoming jumps detected bearing %d. Unidentified vessels."), heading), "Red")
     else
-        odysseus:addToShipLog(string.format(_("shipLog", "EVA sector scanner alarm. Multiple incoming jumps detected from heading %d. Identified vessels."), heading), "White")
+        odysseus:addToShipLog(string.format(_("shipLog", "EVA sector scanner alarm. Multiple incoming jumps detected bearing %d. Identified vessels."), heading), "White")
     end
 end
     
