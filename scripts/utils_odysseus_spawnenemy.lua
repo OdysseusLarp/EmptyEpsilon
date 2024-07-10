@@ -14,7 +14,7 @@ end
 
 function spawn_wave(x, y, size, orders, tx, ty)
     local heading = tostring(math.floor(angleHeading(odysseus, x, y)))
-    odysseus:addToShipLog(string.format(_("shipLog", "EVA sector scanner alarm. Multiple incoming jumps detected from heading %d. Unidentified vessels."), heading), "Red")
+    odysseus:addToShipLog(string.format(_("shipLog", "EVA sector scanner alarm. Multiple incoming jumps detected bearing %d. Unidentified vessels."), heading), "Red")
 
     --Defines the random distance min-max length where the enemies are spawn from the point clicked on the map
     distanceMin = 1000;
