@@ -1,7 +1,9 @@
 This [EmptyEpsilon](https://github.com/daid/EmptyEpsilon) fork is used in the [Odysseus LARP](https://www.odysseuslarp.com/). It contains a few changes to the original EmptyEpsilon, most notably:
 
 * Added custom ships, scenarios, factions and related models/assets
-* Added DMX configuration to match our DMX setup
+* Added DMX configuration to match our DMX setup and exposed Lua functions to the HTTP server to enable/disable some DMX channels during runtime
+* Added and exposed functions that report launch pad/fighter status to the HTTP server
+* Minor changes to make our custom built controllers work smoothly
 * Minor changes to radar and scanner ranges
 * Minor text changes to make some weapon descriptions match the Odysseus setting
 * Some features removed from engineering view, as we mostly use another system for that
